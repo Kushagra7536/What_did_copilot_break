@@ -10,17 +10,17 @@ export default function DiffInput({
   isLoading,
 }) {
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {/* Mode Toggle */}
-      <div className="flex items-center gap-2">
-        <div className="flex rounded-lg border border-surface-600/60 bg-surface-800/60 p-0.5">
+      <div className="flex items-center gap-4">
+        <div className="flex rounded-lg border-2 border-[#1a1a1a] bg-white p-1 shadow-[2px_2px_0px_#1a1a1a]">
           <button
             type="button"
             onClick={() => setMode("split")}
-            className={`rounded-md px-3 py-1.5 text-xs font-medium transition-all duration-200
+            className={`rounded-md px-4 py-2 text-sm font-bold transition-all duration-200
               ${mode === "split"
-                ? "bg-accent-600/20 text-accent-400 shadow-sm"
-                : "text-gray-500 hover:text-gray-300"
+                ? "bg-[#1a1a1a] text-white"
+                : "text-gray-600 hover:text-[#1a1a1a] hover:bg-gray-100"
               }`}
           >
             Side-by-Side
@@ -28,30 +28,30 @@ export default function DiffInput({
           <button
             type="button"
             onClick={() => setMode("unified")}
-            className={`rounded-md px-3 py-1.5 text-xs font-medium transition-all duration-200
+            className={`rounded-md px-4 py-2 text-sm font-bold transition-all duration-200
               ${mode === "unified"
-                ? "bg-accent-600/20 text-accent-400 shadow-sm"
-                : "text-gray-500 hover:text-gray-300"
+                ? "bg-[#1a1a1a] text-white"
+                : "text-gray-600 hover:text-[#1a1a1a] hover:bg-gray-100"
               }`}
           >
             Unified Diff
           </button>
         </div>
-        <span className="text-[11px] text-gray-600">
+        <span className="text-lg text-gray-600 font-['Caveat']">
           {mode === "split" ? "Paste before & after code" : "Paste a unified diff"}
         </span>
       </div>
 
       {mode === "split" ? (
         /* ── Split Mode ── */
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {/* Before */}
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <div className="h-2.5 w-2.5 rounded-full bg-rose-400/60" />
+              <div className="h-3 w-3 rounded-full border-2 border-[#1a1a1a] bg-red-400" />
               <label
                 htmlFor="before-code"
-                className="text-xs font-semibold uppercase tracking-wider text-gray-400"
+                className="text-sm font-bold uppercase tracking-wider text-[#1a1a1a] font-['Gloria_Hallelujah']"
               >
                 Before
               </label>
@@ -63,7 +63,7 @@ export default function DiffInput({
               placeholder={"// Paste the original code here\nfunction greet(name) {\n  return 'Hello ' + name;\n}"}
               rows={14}
               disabled={isLoading}
-              className="code-textarea border-surface-600/40"
+              className="code-textarea"
               spellCheck={false}
             />
           </div>
@@ -71,10 +71,10 @@ export default function DiffInput({
           {/* After */}
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <div className="h-2.5 w-2.5 rounded-full bg-emerald-400/60" />
+              <div className="h-3 w-3 rounded-full border-2 border-[#1a1a1a] bg-green-400" />
               <label
                 htmlFor="after-code"
-                className="text-xs font-semibold uppercase tracking-wider text-gray-400"
+                className="text-sm font-bold uppercase tracking-wider text-[#1a1a1a] font-['Gloria_Hallelujah']"
               >
                 After
               </label>
@@ -86,7 +86,7 @@ export default function DiffInput({
               placeholder={"// Paste the modified code here\nfunction greet(name = 'World') {\n  return `Hello ${name}!`;\n}"}
               rows={14}
               disabled={isLoading}
-              className="code-textarea border-surface-600/40"
+              className="code-textarea"
               spellCheck={false}
             />
           </div>
@@ -95,10 +95,10 @@ export default function DiffInput({
         /* ── Unified Mode ── */
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <div className="h-2.5 w-2.5 rounded-full bg-accent-400/60" />
+            <div className="h-3 w-3 rounded-full border-2 border-[#1a1a1a] bg-blue-400" />
             <label
               htmlFor="unified-diff"
-              className="text-xs font-semibold uppercase tracking-wider text-gray-400"
+              className="text-sm font-bold uppercase tracking-wider text-[#1a1a1a] font-['Gloria_Hallelujah']"
             >
               Unified Diff
             </label>
@@ -110,7 +110,7 @@ export default function DiffInput({
             placeholder={"- function greet(name) {\n-   return 'Hello ' + name;\n- }\n+ function greet(name = 'World') {\n+   return `Hello ${name}!`;\n+ }"}
             rows={16}
             disabled={isLoading}
-            className="code-textarea border-surface-600/40"
+            className="code-textarea"
             spellCheck={false}
           />
         </div>

@@ -69,33 +69,31 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden text-[#0a0a0a]">
       {/* ── Background FX ── */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute -top-40 left-1/3 h-[500px] w-[500px] rounded-full bg-accent-600/[0.06] blur-[140px]" />
-        <div className="absolute bottom-0 right-1/4 h-[400px] w-[400px] rounded-full bg-orange-500/[0.04] blur-[120px]" />
+      <div className="fixed inset-0 -z-10 bg-[#fafafa]">
         <div
-          className="absolute inset-0 opacity-[0.025]"
+          className="absolute inset-0 opacity-[0.5]"
           style={{
-            backgroundImage: `linear-gradient(rgba(139,92,246,0.4) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(139,92,246,0.4) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(#e5e5e5 1px, transparent 1px),
+                              linear-gradient(90deg, #e5e5e5 1px, transparent 1px)`,
             backgroundSize: "48px 48px",
           }}
         />
       </div>
 
       {/* ── Header ── */}
-      <header className="sticky top-0 z-30 border-b border-surface-600/40 bg-surface-950/80 backdrop-blur-xl">
+      <header className="sticky top-0 z-30 border-b-2 border-[#1a1a1a] bg-[#fafafa]/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
           <div className="flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-orange-400 to-rose-500 text-sm font-extrabold text-white shadow-lg shadow-orange-500/20">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-[#1a1a1a] bg-white text-lg font-bold text-[#1a1a1a] shadow-[2px_2px_0px_#1a1a1a] font-['Gloria_Hallelujah']">
               ?!
             </div>
             <div>
-              <h1 className="text-sm font-bold text-white tracking-tight leading-none">
+              <h1 className="text-base font-bold text-[#1a1a1a] tracking-tight leading-none font-['Inter']">
                 What Did Copilot Break?
               </h1>
-              <p className="text-[10px] text-gray-500 mt-0.5">
+              <p className="text-[12px] text-gray-600 mt-1 font-['Caveat'] text-lg leading-none">
                 AI-powered diff explainer
               </p>
             </div>
@@ -103,11 +101,11 @@ export default function App() {
           <button
             id="api-key-btn"
             onClick={() => setShowKeyModal(true)}
-            className="flex items-center gap-1.5 rounded-lg border border-surface-500/50 bg-surface-800/80 px-3 py-1.5
-                       text-xs text-gray-400 transition-all hover:border-accent-500/30 hover:text-gray-300"
+            className="flex items-center gap-1.5 rounded-lg border-2 border-[#1a1a1a] bg-white px-3 py-1.5
+                       text-sm font-semibold text-[#1a1a1a] transition-all shadow-[2px_2px_0px_#1a1a1a] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#1a1a1a] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
           >
             <svg
-              className="h-3.5 w-3.5"
+              className="h-4 w-4"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -131,15 +129,12 @@ export default function App() {
           <div className="animate-fade-in-up">
             {/* Empty-state hero */}
             {status === "idle" && !hasInput && (
-              <div className="mb-8 text-center">
-                <p className="text-4xl mb-3">🔍</p>
-                <h2 className="text-2xl font-extrabold text-white sm:text-3xl tracking-tight">
-                  Paste a diff.{" "}
-                  <span className="bg-gradient-to-r from-orange-400 to-rose-400 bg-clip-text text-transparent">
-                    Get answers.
-                  </span>
+              <div className="mb-10 text-center">
+                <p className="text-5xl mb-4 grayscale">🔍</p>
+                <h2 className="text-4xl font-extrabold text-[#1a1a1a] sm:text-5xl tracking-tight font-['Gloria_Hallelujah']">
+                  Paste a diff. Get answers.
                 </h2>
-                <p className="mt-2 text-sm text-gray-500 max-w-lg mx-auto">
+                <p className="mt-4 text-xl text-gray-700 max-w-xl mx-auto font-['Caveat']">
                   Drop in your before &amp; after code (or a unified diff) and let
                   Claude explain what changed, what could break, and what to test.
                 </p>
@@ -147,7 +142,7 @@ export default function App() {
             )}
 
             {/* Input area */}
-            <div className="rounded-2xl border border-surface-600/40 bg-surface-800/30 p-5 sm:p-6 backdrop-blur-sm">
+            <div className="rounded-2xl border-2 border-[#1a1a1a] bg-white p-5 sm:p-6 shadow-[6px_6px_0px_#1a1a1a]">
               <DiffInput
                 mode={mode}
                 setMode={setMode}
@@ -161,27 +156,27 @@ export default function App() {
               />
 
               {/* Submit button */}
-              <div className="mt-5">
+              <div className="mt-6">
                 <button
                   id="analyze-btn"
                   onClick={handleAnalyze}
                   disabled={!hasInput}
-                  className="group w-full rounded-xl bg-gradient-to-r from-orange-500 to-rose-500
-                             px-6 py-3.5 font-semibold text-white
+                  className="group w-full rounded-xl bg-[#1a1a1a] border-2 border-[#1a1a1a]
+                             px-6 py-4 font-bold text-white text-lg
                              transition-all duration-200
-                             hover:from-orange-400 hover:to-rose-400
-                             hover:shadow-[0_0_30px_rgba(249,115,22,0.2)]
-                             active:scale-[0.98]
-                             disabled:opacity-30 disabled:cursor-not-allowed
-                             disabled:hover:shadow-none"
+                             hover:bg-[#2a2a2a]
+                             shadow-[4px_4px_0px_rgba(0,0,0,0.2)]
+                             active:translate-x-[2px] active:translate-y-[2px] active:shadow-none
+                             disabled:opacity-40 disabled:cursor-not-allowed
+                             disabled:active:translate-x-0 disabled:active:translate-y-0 disabled:shadow-none"
                 >
-                  <span className="flex items-center justify-center gap-2">
+                  <span className="flex items-center justify-center gap-2 font-['Inter']">
                     <svg
                       className="h-5 w-5"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      strokeWidth={2}
+                      strokeWidth={2.5}
                     >
                       <path
                         strokeLinecap="round"
@@ -197,14 +192,14 @@ export default function App() {
 
             {/* Error message */}
             {status === "error" && error && (
-              <div className="mt-4 rounded-xl border border-rose-400/20 bg-rose-400/5 px-4 py-3 animate-fade-in-up">
-                <div className="flex items-start gap-2">
-                  <span className="text-base">💥</span>
+              <div className="mt-6 rounded-xl border-2 border-red-500 bg-red-50 px-5 py-4 animate-fade-in-up shadow-[4px_4px_0px_#ef4444]">
+                <div className="flex items-start gap-3">
+                  <span className="text-xl">💥</span>
                   <div>
-                    <p className="text-sm font-medium text-rose-400">
+                    <p className="text-base font-bold text-red-700">
                       Something went wrong
                     </p>
-                    <p className="mt-1 text-xs text-rose-300/70 font-mono break-all">
+                    <p className="mt-1 text-sm text-red-600 font-mono break-all">
                       {error}
                     </p>
                   </div>
@@ -224,10 +219,10 @@ export default function App() {
       </main>
 
       {/* ── Footer ── */}
-      <footer className="mt-10 pb-8 text-center">
-        <p className="text-[11px] text-gray-600">
+      <footer className="mt-12 pb-8 text-center">
+        <p className="text-lg text-gray-600 font-['Caveat']">
           Paste code → AI reviews → ship with confidence · Powered by{" "}
-          <span className="text-gray-500">Featherless AI</span>
+          <span className="font-bold text-[#1a1a1a]">Featherless AI</span>
         </p>
       </footer>
 
